@@ -20,7 +20,7 @@ repositories {
 
 dependencies {
   ...
-  compile 'org.grails.plugins:aws-sdk-sqs-extend:0.1'
+  compile 'org.grails.plugins:aws-sdk-sqs-extend:1.0.0'
   ...
 ```
 
