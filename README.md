@@ -7,7 +7,24 @@ The maximum size of SQS message is 262,144 bytes (256 KB). If message size is la
 To resolve it, Amazon provides one solution that store the message itself in S3 and send message reference into queue. And Amazon also provides Java library [Amazon SQS Extended Client Library for Java](https://github.com/awslabs/amazon-sqs-java-extended-client-lib).
 This plugin is based on [AWS SDK SQS Grails Plugin](https://github.com/agorapulse/grails-aws-sdk/tree/master/grails-aws-sdk-sqs), and invoke [Amazon SQS Extended Client Library for Java](https://github.com/awslabs/amazon-sqs-java-extended-client-lib) to send normal and large size messages. In order to send large message, one S3 bucket for message is necessary.
 
-## Message management
+# Installation
+
+Add plugin dependency to your `build.gradle`:
+
+```groovy
+repositories {
+    ...
+    maven { url 'https://dl.bintray.com/liandalin0207/plugins' }
+    ...
+}
+
+dependencies {
+  ...
+  compile 'org.grails.plugins:aws-sdk-sqs-extend:0.1'
+  ...
+```
+
+# Message management
 
 ```groovy
 // Send large message
