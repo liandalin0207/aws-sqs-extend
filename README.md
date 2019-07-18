@@ -15,3 +15,10 @@ amazonSQSExtendService.sendMessage(inputQueueName, messageBody, sqsS3BucketName)
 
 // Send normal message
 amazonSQSExtendService.sendMessage(inputQueueName, messageBody)
+```
+
+# Bugs
+
+To report any bug, please use the project [Issues](https://github.com/liandalin0207/aws-sqs-extend/issues) section on GitHub.
+
+Feedback and pull requests are welcome!
