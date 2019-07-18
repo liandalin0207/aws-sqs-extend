@@ -1,0 +1,67 @@
+buildscript {
+    ext {
+        grailsVersion = project.grailsVersion
+    }
+    repositories {
+        mavenLocal()
+        maven { url "https://repo.grails.org/grails/core" }
+    }
+    dependencies {
+        classpath "org.grails:grails-gradle-plugin:$grailsVersion"
+    }
+}
+
+version "0.1"
+group "org.grails.plugins"
+
+apply plugin:"eclipse"
+apply plugin:"idea"
+apply plugin:"org.grails.grails-plugin"
+apply plugin:"org.grails.grails-plugin-publish"
+
+ext {
+    grailsVersion = project.grailsVersion
+    gradleWrapperVersion = project.gradleWrapperVersion
+}
+
+repositories {
+    mavenLocal()
+    maven { url "https://repo.grails.org/grails/core" }
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.grails:grails-bom:$grailsVersion"
+    }
+    applyMavenExclusions false
+}
+
+dependencies {
+    compile "org.springframework.boot:spring-boot-starter-logging"
+    compile "org.springframework.boot:spring-boot-autoconfigure"
+    compile "org.grails:grails-core"
+    console "org.grails:grails-console"
+    profile "org.grails.profiles:plugin:3.1.4"
+    provided "org.grails:grails-plugin-services"
+    provided "org.grails:grails-plugin-domain-class"
+    testCompile "org.grails:grails-plugin-testing"
+
+    compile "org.grails.plugins:aws-sdk-sqs:$awsSdkPluginVersion"
+    compile "org.grails.plugins:aws-sdk-s3:$awsSdkPluginVersion"
+    compile "com.amazonaws:amazon-sqs-java-extended-client-lib:$awsSqsJavaExtendedLibVersion"
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = gradleWrapperVersion
+}
+grailsPublish {
+    user = System.getenv("BINTRAY_USER") ?: ''
+    key = System.getenv("BINTRAY_KEY") ?: ''
+    githubSlug = 'liandalin0207/aws-sqs-extend'
+    license {
+        name = 'Apache-2.0'
+    }
+    title = "AWS SQS extend plugin"
+    desc = "Based on Grails AWS SDK SQS Plugin, use the Amazon SQS Extended Client Library for Java to send messages larger than 256 KB."
+    developers = [dalinlian: "Dalin Lian"]
+}
